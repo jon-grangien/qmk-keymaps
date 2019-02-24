@@ -10,7 +10,7 @@
 #define _LOWER 3
 #define _RAISE 4
 #define _FN 6
-#define _ADJUST 16
+#define _ADJUST 7
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -21,13 +21,17 @@ enum custom_keycodes {
 #define RAISE  MO(_RAISE)
 #define ADJUST MO(_ADJUST)
 #define FN     MO(_FN)
-#define SHIFT_SPC  SFT_T(KC_SPC)
-#define RAISESPACE LT(_RAISE, KC_SPC)
 
 #define CTRL_TAB       LCTL(KC_TAB)
 #define CTRL_SHIFT_TAB LCTL(LSFT(KC_TAB))
 #define ALT_TAB        LALT(KC_TAB)
 #define SHIFT_BCKSPC   LSFT_T(KC_BSPC)
+#define SHIFT_SPC      SFT_T(KC_SPC)
+#define TAB_SHIFT      SFT_T(KC_TAB)
+#define RAISESPACE     LT(_RAISE, KC_SPC)
+
+#define WIN_WS_RIGHT LCTL(LGUI_T(KC_RIGHT))
+#define WIN_WS_LEFT  LCTL(LGUI_T(KC_LEFT))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -37,34 +41,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |CrlEsc|   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |SftBsp|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * |TabSft|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |Adjust| Ctrl | Alt  | GUI  |Lower |SFTSPC|Space |Raise | Enter| C_TAB| RALT | Fn   |
+ * |Adjust| Ctrl | Alt  | GUI  |Lower |SftBsp|Space |Raise | Enter| C_TAB| RALT | Fn   |
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_ortho_4x12( \
   KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC, \
   CTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT, \
-  SHIFT_BCKSPC, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-   ADJUST,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SHIFT_SPC, KC_SPC,RAISE,   KC_ENT, CTRL_TAB, KC_RALT, FN  \
+  TAB_SHIFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
+   ADJUST,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SHIFT_BCKSPC, KC_SPC,RAISE,   KC_ENT, CTRL_TAB, KC_RALT, FN  \
 ),
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
- * | Tab   |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
- * |------ +------+------+------+------+-------------+------+------+------+------+------|
- * | CrlEsc|   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
- * |------ +------+------+------+------+------|------+------+------+------+------+------|
- * |SftBsp |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
- * |------ +------+------+------+------+------+------+------+------+------+------+------|
- * |Adjust | Ctrl | Alt  | GUI  |Lower |SFTSPC|Space |Raise | Enter|C_TAB | RALT | Fn   |
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |CrlEsc|   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |TabSft|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |Adjust| Ctrl | Alt  | GUI  |Lower |SftBsp|Space |Raise | Enter|C_TAB | RALT | Fn   |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_ortho_4x12(
    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
    CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-   SHIFT_BCKSPC, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-   ADJUST,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SHIFT_SPC, KC_SPC,RAISE,   KC_ENT, CTRL_TAB, KC_RALT, FN  \
+   TAB_SHIFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
+   ADJUST,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   SHIFT_BCKSPC, KC_SPC,RAISE,   KC_ENT, CTRL_TAB, KC_RALT, FN  \
 ),
 
 /* Lower
@@ -92,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |  ä   |  å   |  ö   | ---- | ---- |  <      v       ^      >
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | ---- | ---- | ---- | ---- | ---- | ---- |      |      |      |      |      | ---- |
+ * | ---- | ---- | ---- | ---- | ---- | ---- |      |      |W_WS_L|W_WS_R|      | ---- |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | ---- | ---- | ---- | ---- | ---- | ---- | ---- |      |      |      |   ^  | ---- |
  * `-----------------------------------------------------------------------------------'
@@ -100,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = LAYOUT_ortho_4x12( \
             _______, _______, _______, _______, _______, _______, KC_UNDS, KC_MINS, KC_PLUS, KC_EQUAL, KC_ASTR, KC_BSLS, \
             _______, _______, RALT(KC_Q), RALT(KC_W), RALT(KC_P), _______, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, _______, \
-            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______,   \
+            _______, _______, _______, _______, _______, _______, _______, _______, _______, WIN_WS_LEFT,  WIN_WS_RIGHT, _______,   \
             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______ \
 ), 
 
@@ -181,3 +185,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+
