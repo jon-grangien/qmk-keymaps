@@ -31,6 +31,8 @@ enum custom_keycodes {
 #define SHIFT_SPC      SFT_T(KC_SPC)
 #define TAB_SHIFT      SFT_T(KC_TAB)
 #define RAISESPACE     LT(_RAISE, KC_SPC)
+#define L_AG_SWAP      MAGIC_SWAP_LALT_LGUI
+#define L_AG_NORM      MAGIC_UNSWAP_LALT_LGUI
 
 #define WIN_WS_RIGHT LCTL(LWIN(KC_RIGHT))
 #define WIN_WS_LEFT  LCTL(LWIN(KC_LEFT))
@@ -75,19 +77,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Lower
  * ,--------------------------------------------------------------------------------------.
- * |  ~/` |   !  |   @  |   #  |   $  |   %  |   ^  |   7  |  8   |  9   |BckSp | Del     |
+ * |  ~/` |   !  |   @  |   #  |   $  |   %  |   ^  |   1  |  2   |  3   |BckSp | Del     |
  * |------+------+------+------+------+-------------+------+------+------+------+---------|
  * |      |   {  |   (  |   )  |   }  |  +   |   &  |   4  |  5   |  6   |C_TAB |ALT_TAB  |      
  * |------+------+------+------+------+------|------+------+------+------+------+---------|
- * |      |      |   [  |   ]  |  _   |  |   |   *  |   1  |  2   |  3   |CS_TAB|S_ALT_TAB|
+ * |      |      |   [  |   ]  |  _   |  |   |   *  |   7  |  8   |  9   |CS_TAB|S_ALT_TAB|
  * |------+------+------+------+------+------+------+------+------+------+------+---------|
- * |      |      |      |      |      |      |      |  0   |  .   |      |      |PRTSCR   |
+ * |      |      |      |      |      |      |      |   0  |  .   |      |      |PRTSCR   |
  * `--------------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_ortho_4x12( \
-  KC_GRAVE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_7, KC_8,   KC_9,    KC_BSPC,        KC_DEL, \
+  KC_GRAVE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_1, KC_2,   KC_3,    KC_BSPC,        KC_DEL, \
   _______,  KC_LCBR, KC_LPRN, KC_RPRN, KC_RCBR, KC_PLUS, KC_ASTR, KC_4, KC_5,   KC_6,    CTRL_TAB,       ALT_TAB,  \
-  _______,  _______, KC_LBRC, KC_RBRC, KC_UNDS, KC_PIPE, KC_AMPR, KC_1, KC_2,   KC_3,    CTRL_SHIFT_TAB, SHFT_ALT_TAB, \
+  _______,  _______, KC_LBRC, KC_RBRC, KC_UNDS, KC_PIPE, KC_AMPR, KC_7, KC_8,   KC_9,    CTRL_SHIFT_TAB, SHFT_ALT_TAB, \
   _______,  _______, _______, _______, _______, _______, _______, KC_0, KC_DOT, _______, _______,        KC_PSCR \
 ),
 
@@ -139,10 +141,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_CONFIG] =  LAYOUT_ortho_4x12( \
-  RESET,   COLEMAK,     QWERTY,  _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-  AU_ON,   AU_OFF,      AG_NORM, AG_SWAP, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, \
-  _______, KC_CAPSLOCK, _______, _______, _______, _______, _______, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY, \
-  _______, _______,     _______,_______,_______,_______,_______, _______, _______, _______, _______, _______ \
+  RESET,   COLEMAK,     QWERTY,    _______,   _______, _______, _______, _______, _______, _______, _______, _______, \
+  AU_ON,   AU_OFF,      L_AG_NORM, L_AG_SWAP, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, \
+  _______, KC_CAPSLOCK, _______,   _______,   _______, _______, _______, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY, \
+  _______, _______,     _______,   _______,   _______,_______,  _______, _______, _______, _______, _______, _______ \
 ),
 };
 
