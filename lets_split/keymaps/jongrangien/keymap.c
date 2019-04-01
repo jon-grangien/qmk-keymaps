@@ -11,6 +11,7 @@
 #define _RAISE 4
 #define _FN 6
 #define _CONFIG 7
+#define _WSNAV 7
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -21,9 +22,10 @@ enum custom_keycodes {
 #define RAISE  MO(_RAISE)
 #define CONFIG MO(_CONFIG)
 #define FN     MO(_FN)
+#define WSNAV  MO(_WSNAV)
 
 #define CTRL_TAB       LCTL(KC_TAB)
-#define CTRL_SHIFT_TAB LCTL(LSFT(KC_TAB))
+#define CTRL_S_TAB LCTL(LSFT(KC_TAB))
 #define ALT_TAB        LALT(KC_TAB)
 #define SHFT_ALT_TAB   LSFT(LALT(KC_TAB))
 #define ALT_F4         LALT(KC_F4)
@@ -33,6 +35,17 @@ enum custom_keycodes {
 #define RAISESPACE     LT(_RAISE, KC_SPC)
 #define L_AG_SWAP      MAGIC_SWAP_LALT_LGUI
 #define L_AG_NORM      MAGIC_UNSWAP_LALT_LGUI
+
+#define WS_MOD_1       LGUI(KC_1)
+#define WS_MOD_2       LGUI(KC_2)
+#define WS_MOD_3       LGUI(KC_3)
+#define WS_MOD_4       LGUI(KC_4)
+#define WS_MOD_5       LGUI(KC_5)
+#define WS_MOD_6       LGUI(KC_6)
+#define WS_MOD_7       LGUI(KC_7)
+#define WS_MOD_8       LGUI(KC_8)
+#define WS_MOD_9       LGUI(KC_9)
+#define WS_MOD_0       LGUI(KC_0)
 
 #define WIN_WS_RIGHT LCTL(LWIN(KC_RIGHT))
 #define WIN_WS_LEFT  LCTL(LWIN(KC_LEFT))
@@ -77,39 +90,57 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Lower
  * ,-----------------------------------------.          .--------------------------------------------.
- * |  ~/` |   !  |   @  |   #  |   $  |   %  |          |   ^  |   7  |  8   |  9   |BckSp | Del     |
+ * |  ~/` |   !  |   @  |   #  |   $  |   %  |          |   ^  |   7  |  8   |  9   |  \   | Del     |
  * |------+------+------+------+------+-------          -------+------+------+------+------+---------|
- * |      |   {  |   (  |   )  |   }  |  +   |          |   &  |   4  |  5   |  6   |C_TAB |ALT_TAB  |      
+ * |      |   {  |   (  |   )  |   }  |  +   |          |   &  |   4  |  5   |  6   |   +  |ALT_TAB  |
  * |------+------+------+------+------+------|          |------+------+------+------+------+---------|
- * |      |      |   [  |   ]  |  _   |  |   |          |   *  |   1  |  2   |  3   |CS_TAB|S_ALT_TAB|
+ * |      |      |   [  |   ]  |  _   |  |   |          |   *  |   1  |  2   |  3   |   -  |S_ALT_TAB|
  * |------+------+------+------+------+------+          +------+------+------+------+------+---------|
- * |      |      |      |      |      |      |          |      |   0  |  .   |      |      |PRTSCR   |
+ * |      |      |      |      |      |WSNAV |          |Enter |   0  |  .   |      |      |PRTSCR   |
  * `-----------------------------------------'          '--------------------------------------------'
  */
 [_LOWER] = LAYOUT_ortho_4x12( \
-  KC_GRAVE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, /**/ KC_CIRC, KC_7, KC_8,   KC_9,    KC_BSPC,        KC_DEL, \
-  _______,  KC_LCBR, KC_LPRN, KC_RPRN, KC_RCBR, KC_PLUS, /**/ KC_ASTR, KC_4, KC_5,   KC_6,    CTRL_TAB,       ALT_TAB,  \
-  _______,  _______, KC_LBRC, KC_RBRC, KC_UNDS, KC_PIPE, /**/ KC_AMPR, KC_1, KC_2,   KC_3,    CTRL_SHIFT_TAB, SHFT_ALT_TAB, \
-  _______,  _______, _______, _______, _______, _______, /**/ _______, KC_0, KC_DOT, _______, _______,        KC_PSCR \
+  KC_GRAVE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, /**/ KC_CIRC, KC_7, KC_8,   KC_9,    KC_BSLS, KC_DEL, \
+  _______,  KC_LCBR, KC_LPRN, KC_RPRN, KC_RCBR, KC_PLUS, /**/ KC_ASTR, KC_4, KC_5,   KC_6,    KC_PLUS, ALT_TAB,  \
+  _______,  _______, KC_LBRC, KC_RBRC, KC_UNDS, KC_PIPE, /**/ KC_AMPR, KC_1, KC_2,   KC_3,    KC_MINS, SHFT_ALT_TAB, \
+  _______,  _______, _______, _______, _______, WSNAV,   /**/ KC_ENT,  KC_0, KC_DOT, _______, _______, KC_PSCR \
 ),
 
 /* Raise
  * ,-----------------------------------------.          .-----------------------------------------.
- * |      |win+1 |win+2 |win+3 |win+4 |win+5 |          |   *  |  =   |  _   |  -   |   +  |  \   |
- * |------+------+------+------+------+-------          -------+------+------+------+------+------|
- * |      |      |  ä   |  å   |  ö   |      |          |      |  <   |  v   |   ^  |   >  |      |
+ * |      |win+1 |win+2 |win+3 |win+4 |win+5 |          |      |      |  =   |  -   |      |      |
+ * |------+------+------+------+------+-------          |------+------+------+------+------+------|
+ * |      |      |  ä   |  å   |  ö   |      |          |      |  <   |  v   |  ^   |   >  |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
- * |      |      |      |      |      |      |          |      |      |W_WS_L|W_WS_R|      |      |
+ * |      |      |      |      |      |      |          |CS_TAB|C_TAB |W_WS_L|W_WS_R|      |      |
  * |------+------+------+------+------+------+          +------+------+------+------+------+------|
  * |      |      |      |      |      |      |          |      |      |      |      |      |      |
  * `-----------------------------------------'          '-----------------------------------------'
  */
 [_RAISE] = LAYOUT_ortho_4x12( \
-  _______, LWIN(KC_1), LWIN(KC_2),  LWIN(KC_3),  LWIN(KC_4),  LWIN(KC_5), /**/ KC_ASTR, KC_EQUAL, KC_UNDS,     KC_MINS,      KC_PLUS,  KC_BSLS, \
-  _______, _______,    RALT(KC_Q),  RALT(KC_W),  RALT(KC_P),  _______,    /**/ _______, KC_LEFT,  KC_DOWN,     KC_UP,        KC_RIGHT, _______, \
-  _______, _______,    _______,     _______,     _______,     _______,    /**/ _______, _______,  WIN_WS_LEFT, WIN_WS_RIGHT, _______,  _______,   \
-  _______, _______,    _______,     _______,     _______,     _______,    /**/ _______, _______,  _______,     _______,      _______,  _______ \
+  _______, LWIN(KC_1), LWIN(KC_2), LWIN(KC_3),  LWIN(KC_4),  LWIN(KC_5), /**/ _______,    _______,  KC_EQUAL,    KC_MINS,      _______,  _______, \
+  _______, _______,    RALT(KC_Q), RALT(KC_W),  RALT(KC_P),  _______,    /**/ _______,    KC_LEFT,  KC_DOWN,     KC_UP,        KC_RIGHT, _______, \
+  _______, _______,    _______,    _______,     _______,     _______,    /**/ CTRL_S_TAB, CTRL_TAB, WIN_WS_LEFT, WIN_WS_RIGHT, _______,  _______,   \
+  _______, _______,    _______,    _______,     _______,     _______,    /**/ _______,    _______,  _______,     _______,      _______,  _______ \
 ), 
+
+/* Workspace nav
+ * ,-----------------------------------------.          .-----------------------------------------.
+ * |      |      |      |      |      |      |          |      |mod 7 |mod 8 |mod 9 |      |      |
+ * |------+------+------+------+------+-------          -------+------+------+------+------+------|
+ * |      |      |      |      |      |      |          |      |mod 4 |mod 5 |mod 6 |      |      |
+ * |------+------+------+------+------+------|          |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |          |      |mod 1 |mod 2 |mod 3 |      |      |
+ * |------+------+------+------+------+------+          +------+------+------+------+------+------|
+ * |      |      |      |      |      |      |          |      |mod 0 |      |      |      |      |
+ * `-----------------------------------------'          '-----------------------------------------'
+ */
+[_WSNAV] = LAYOUT_ortho_4x12( \
+  _______, _______, _______, _______, _______, _______, /**/ _______, WS_MOD_7, WS_MOD_8, WS_MOD_9, _______, _______, \
+  _______, _______, _______, _______, _______, _______, /**/ _______, WS_MOD_4, WS_MOD_5, WS_MOD_6, _______, _______, \
+  _______, _______, _______, _______, _______, _______, /**/ _______, WS_MOD_1, WS_MOD_2, WS_MOD_3, _______, _______, \
+  _______, _______, _______, _______, _______, _______, /**/ _______, WS_MOD_0, _______,  _______, _______, _______ \
+),
 
 /* Fn (F-keys etc)
  * ,-----------------------------------------.          .-----------------------------------------.
