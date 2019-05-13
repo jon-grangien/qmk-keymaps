@@ -39,3 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PERMISSIVE_HOLD
 #define TAPPING_FORCE_HOLD
 
+// space cadet keys config
+#define LSPO_KEYS KC_LSFT, KC_LSFT, KC_LBRC
+#define RSPC_KEYS KC_RSFT, KC_LSFT, KC_RBRC
+#define LAPO_KEYS KC_LALT, KC_LSFT, KC_9
+#define LCPC_KEYS KC_RCTL, KC_LSFT, KC_0
