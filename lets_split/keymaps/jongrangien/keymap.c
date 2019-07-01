@@ -46,16 +46,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------         -------+------+------+------+------+------|
  * |CrlEsc|   A  |   R  |   S  |   T  |   D  |         |   H  |   N  |   E  |   I  |   O  |  '   |
  * |------+------+------+------+------+------|         |------+------+------+------+------+------|
- * |TabSft|   Z  |   X  |   C  |   V  |   B  |         |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * |TabSft|   Z  |   X  |   C  |   V  |   B  |         |   K  |   M  |   ,  |   .  |   /  |R ctl |
  * |------+------+------+------+------+------+         +------+------+------+------+------+------|
- * |Config| GUI  | Alt  |SC Sft|Lower | Bksp |         |Space |Raise |SC Sft| Ctrl | RALT | Fn   |
+ * |Config| GUI  | Alt  |SC Sft|Lower | Bksp |         |Space |Raise |SC Sft| Enter| RALT | Fn   |
  * `-----------------------------------------'         '-----------------------------------------'
  */
 [_COLEMAK] = LAYOUT_ortho_4x12( \
   KC_LGUI,       KC_Q,    KC_W,    KC_F,    KC_P,  KC_G,    /**/   KC_J,   KC_L,  KC_U,    KC_Y,    KC_SCLN, KC_BSPC, \
   CTL_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,  KC_D,    /**/   KC_H,   KC_N,  KC_E,    KC_I,    KC_O,    KC_QUOT, \
-  TAB_SHIFT,     KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,    /**/   KC_K,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-  CONFIG,        KC_LGUI, KC_LALT, KC_LSPO, LOWER, KC_BSPC, /**/   KC_SPC, RAISE, KC_RSPC, KC_RCTL, KC_RALT, FN  \
+  TAB_SHIFT,     KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,    /**/   KC_K,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL , \
+  CONFIG,        KC_LGUI, KC_LALT, KC_LSPO, LOWER, KC_BSPC, /**/   KC_SPC, RAISE, KC_RSPC, KC_ENT, KC_RALT, FN  \
 ),
 
 /* Qwerty
@@ -64,16 +64,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------          -------+------+------+------+------+------|
  * |CrlEsc|   A  |   S  |   D  |   F  |   G  |          |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
- * |TabSft|   Z  |   X  |   C  |   V  |   B  |          |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |TabSft|   Z  |   X  |   C  |   V  |   B  |          |   N  |   M  |   ,  |   .  |   /  |R ctl |
  * |------+------+------+------+------+------+          +------+------+------+------+------+------|
- * |Config| GUI  | Alt  |SC Sft|Lower | Bksp |          |Space |Raise |SC Sft| Ctrl | RALT | Fn   |
+ * |Config| GUI  | Alt  |SC Sft|Lower | Bksp |          |Space |Raise |SC Sft| Enter| RALT | Fn   |
  * `-----------------------------------------'          '-----------------------------------------'
  */
 [_QWERTY] = LAYOUT_ortho_4x12(
    KC_LGUI,       KC_Q,    KC_W,    KC_E,    KC_R,  KC_T,    /**/   KC_Y,   KC_U,  KC_I,    KC_O,    KC_P,    KC_BSPC, \
    CTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,  KC_G,    /**/   KC_H,   KC_J,  KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-   TAB_SHIFT,     KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,    /**/   KC_N,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_ENT , \
-   CONFIG,        KC_LGUI, KC_LALT, KC_LSPO, LOWER, KC_BSPC, /**/   KC_SPC, RAISE, KC_RSPC, KC_RCTL, KC_RALT, FN  \
+   TAB_SHIFT,     KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,    /**/   KC_N,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL , \
+   CONFIG,        KC_LGUI, KC_LALT, KC_LSPO, LOWER, KC_BSPC, /**/   KC_SPC, RAISE, KC_RSPC, KC_ENT, KC_RALT, FN  \
 ),
 
 /* Lower
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise
  * ,-----------------------------------------.          .-----------------------------------------.
- * |      |      |      |      |      |      |          |      |      |  =   |  -   |      |      |
+ * |      |      |      |      |      |      |          |      |      |   =  |  -   |      |      |
  * |------+------+------+------+------+-------          |------+------+------+------+------+------|
  * |      |      |  ä   |  å   |  ö   |      |          |      |  <   |  v   |  ^   |   >  |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
