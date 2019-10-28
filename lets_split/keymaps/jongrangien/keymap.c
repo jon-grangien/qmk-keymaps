@@ -15,7 +15,13 @@
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  COLEMAK
+  COLEMAK,
+  GIT_ADD_ALL,
+  GIT_PULL,
+  GIT_COMMIT,
+  GIT_STATUS,
+  GIT_DIFF,
+  GIT_PUSH
 };
 
 #define LOWER  MO(_LOWER)
@@ -34,6 +40,7 @@ enum custom_keycodes {
 #define TAB_SHIFT      SFT_T(KC_TAB)
 #define L_AG_SWAP      MAGIC_SWAP_LALT_LGUI
 #define L_AG_NORM      MAGIC_UNSWAP_LALT_LGUI
+#define PERM_ALT_TAB   LALT(LCTL(KC_TAB))
 
 #define WIN_WS_RIGHT LCTL(LWIN(KC_RIGHT))
 #define WIN_WS_LEFT  LCTL(LWIN(KC_LEFT))
@@ -116,18 +123,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.          .-----------------------------------------.
  * |      |      |      |      |      |      |          |      |      |      |      |      |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
- * |      |      |GUITAB|S_A_TB|ALT_TB|      |          |      | HOME | PGDN | PGUP |  END |      |
+ * |      |GUITAB|A_C_TB|S_A_TB|ALT_TB|      |          |      | HOME | PGDN | PGUP |  END |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
- * |      |      |      |      |      |      |          |      |      |      |      |      |      |
+ * |g push|g add |g pull|g comt|g sts |g diff|          |      |      |      |      |      |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
  * |      |      |      |      |      |      |          |      |      |      |      |      |      |
  * `-----------------------------------------'          '-----------------------------------------'
  */
 [_ADJUST] =  LAYOUT_ortho_4x12( \
-  _______, _______, _______, _______,      _______, _______, /**/ _______, _______, _______, _______, _______, _______, \
-  _______, _______, GUI_TAB, SHFT_ALT_TAB, ALT_TAB, _______, /**/ _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, \
-  _______, _______, _______, _______,      _______, _______, /**/ _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______,      _______, _______, /**/ _______, _______, _______, _______, _______, _______ \
+  _______,  _______,     _______,      _______,      _______,    _______,   /**/ _______, _______, _______, _______, _______, _______, \
+  _______,  GUI_TAB,     PERM_ALT_TAB, SHFT_ALT_TAB, ALT_TAB,    _______,   /**/ _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, \
+  GIT_PUSH, GIT_ADD_ALL, GIT_PULL,     GIT_COMMIT,   GIT_STATUS, GIT_DIFF,  /**/ _______, _______, _______, _______, _______, _______, \
+  _______,  _______,     _______,      _______,      _______,    _______,   /**/ _______, _______, _______, _______, _______, _______ \
   ),
 
 /* Fn (F-keys etc)
@@ -154,16 +161,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
  * |Aud on|Audoff|AGnorm|AGswap|      |      |          | Play | Prev | Vol- | Vol+ | Next |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
- * |      | CAPS |      |      |      |      |          |      |      |      |      |      |      |
+ * | CAPS |      |      |      |      |      |          |      |      |      |      |      |      |
  * |------+------+------+------+------+------|          |------+------+------+------+------+------|
  * |      |      |      |      |      |      |          |      |      |      |      |      |      |
  * `-----------------------------------------'          '-----------------------------------------'
  */
 [_CONFIG] =  LAYOUT_ortho_4x12( \
-  RESET,   COLEMAK,     QWERTY,    _______,   _______, _______, /**/ _______, _______, _______, _______, _______, _______, \
-  AU_ON,   AU_OFF,      L_AG_NORM, L_AG_SWAP, _______, _______, /**/ KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______,\
-  _______, KC_CAPSLOCK, _______,   _______,   _______, _______, /**/ _______, _______, _______, _______, _______, _______, \
-  _______, _______,     _______,   _______,   _______,_______,  /**/ _______, _______, _______, _______, _______, _______ \
+  RESET,       COLEMAK, QWERTY,    _______,   _______, _______, /**/ _______, _______, _______, _______, _______, _______, \
+  AU_ON,       AU_OFF,  L_AG_NORM, L_AG_SWAP, _______, _______, /**/ KC_MPLY, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _______,\
+  KC_CAPSLOCK, _______, _______,   _______,   _______, _______, /**/ _______, _______, _______, _______, _______, _______, \
+  _______,     _______, _______,   _______,   _______, _______, /**/ _______, _______, _______, _______, _______, _______ \
 )
 };
 
@@ -178,11 +185,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_single_persistent_default_layer(_QWERTY);
       }
       return false;
+      break;
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
       }
       return false;
+      break;
+    case GIT_ADD_ALL:
+      if (record->event.pressed) {
+        SEND_STRING("git add --all");
+      }
+      return false;
+      break;
+    case GIT_PULL:
+      if (record->event.pressed) {
+        SEND_STRING("git pull origin $(git rev-parse --abbrev-ref HEAD)");
+      }
+      return false;
+      break;
+    case GIT_COMMIT:
+      if (record->event.pressed) {
+        SEND_STRING("git commit -m \"\""SS_TAP(X_LEFT));
+      }
+      return false;
+      break;
+    case GIT_STATUS:
+      if (record->event.pressed) {
+        SEND_STRING("git status");
+      }
+      return false;
+      break;
+    case GIT_DIFF:
+      if (record->event.pressed) {
+        SEND_STRING("git diff");
+      }
+      return false;
+      break;
+    case GIT_PUSH:
+      if (record->event.pressed) {
+        SEND_STRING("git push origin $(git rev-parse --abbrev-ref HEAD)");
+      }
+      return false;
+      break;
   }
   return true;
 }

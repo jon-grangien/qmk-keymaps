@@ -40,3 +40,7 @@
 #define TAPPING_TERM 150
 #define PERMISSIVE_HOLD
 #define TAPPING_FORCE_HOLD
+
+// space cadet keys
+#define LSPO_KEYS KC_LSFT, KC_LSFT, KC_LBRC
+#define RSPC_KEYS KC_RSFT, KC_LSFT, KC_RBRC
